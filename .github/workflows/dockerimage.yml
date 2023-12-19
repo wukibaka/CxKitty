@@ -12,7 +12,7 @@ jobs:
     - name: Build-Docker
       run: |
         docker build . --file Dockerfile --tag cxkitty:$(date +%s)
-        docker save cxkitty:$(date +%s) -o image.tar
+        docker save cxkitty -o image.tar
 
     - name: Upload DockerArtifact
       uses: actions/upload-artifact@v3
