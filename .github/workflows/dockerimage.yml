@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on:
+    workflow_dispatch:
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build-Docker
+      run: |
+        docker build . --file Dockerfile --tag cxkitty:$(date +%s)
+        docker save cxkitty:$(date +%s) -o image.tar
+
+    - name: Upload DockerArtifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Docker-amd64
+        path: image.tar
