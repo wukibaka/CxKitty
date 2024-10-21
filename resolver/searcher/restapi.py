@@ -4,7 +4,6 @@ import jsonpath
 import requests
 from bs4 import BeautifulSoup
 from rich import json
-
 from cxapi.schema import QuestionModel
 from . import SearcherBase, SearcherResp
 
@@ -199,30 +198,41 @@ class TiKuHaiSearcher(JsonApiSearcher):
                 "referer": "https://mooc1.chaoxing.com",
                 "Content-Type": "application/json",  # 缺少无法搜索
             },
-            a_field="$.data.answer",
+            a_field="answer",  # 直接提取 data.answer
             ext_params={
                 "key": token,
             },
         )
 
     def parse(self, json_content: dict | list) -> SearcherResp:
-        if jsonpath.compile("$.code").parse(json_content)[0] != 200:
-            if jsonpath.compile("$.msg").parse(json_content):
-                soup = BeautifulSoup(jsonpath.compile("$.msg").parse(json_content)[0], "lxml")
-                msg = soup.find_all("a")
-                if msg:
+        # 检查返回码是否为 200
+        if json_content.get("code") != 200:
+            msg = json_content.get("msg", "")
+            if msg:
+                soup = BeautifulSoup(msg, "lxml")
+                msg_links = soup.find_all("a")
+                if len(msg_links) >= 2:
                     return SearcherResp(
                         -1,
-                        "搜索失败,付费库:" + str(msg[0].text) + "请前往购买" + str(msg[1].attrs["href"]),
+                        "搜索失败,付费库:" + str(msg_links[0].text) + "请前往购买: " + str(msg_links[1].attrs.get("href", "")),
                         self,
                         self.question,
                         None,
                     )
             return SearcherResp(-404, "搜索失败", self, self.question, None)
-        if result := self.rsp_query.parse(json_content):
-            return SearcherResp(0, "ok", self, self.question, result[0][0])
-        return SearcherResp(-500, "未匹配答案字段", self, self.question, None)
 
+        # 如果返回码为 200，解析结果字段
+        data = json_content.get("data")
+        if data:
+            answer_list = data.get("answer")
+            if answer_list:
+                # 返回第一个答案
+                return SearcherResp(0, "ok", self, self.question, answer_list[0])
+            else:
+                return SearcherResp(-500, "答案字段为空", self, self.question, None)
+
+        # 没有匹配到答案字段，返回错误
+        return SearcherResp(-500, "未匹配答案字段", self, self.question, None)
 
 class MukeSearcher(JsonApiSearcher):
     """Muke在线搜索器"""
