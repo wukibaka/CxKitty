@@ -25,7 +25,7 @@ from cxapi.schema import QuestionModel, QuestionsExportSchema, QuestionsExportTy
 from logger import Logger
 
 from .searcher import MultiSearcherWraper, SearcherResp
-
+from .searcher.ollama import OllamaSearcherAPI
 from .searcher.json import JsonFileSearcher
 from .searcher.openai import OpenAISearcher
 from .searcher.restapi import (
@@ -53,6 +53,7 @@ SEARCHERS = {
     "JsonApiSearcher": JsonApiSearcher,
     "LemonSearcher": LemonSearcher,
     "OpenAISearcher": OpenAISearcher,
+    "OllamaSearcherAPI":OllamaSearcherAPI,
 }
 
 
