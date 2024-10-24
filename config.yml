@@ -107,7 +107,7 @@ searchers:
   # - type: cxSearcher
   #   token: "xxx"  # 网课小工具(Go题)题库 Token
 
-  # 题库海搜索源， 暂时可不用token 如若搜索失败 https://afdian.net/a/jiaoyu666 购买token
+  # 题库海搜索源， 暂时可不用token 如若搜索失败 https://shop.tikuhai.com/links/2C63E8E8 购买token
   # - type: TiKuHaiSearcher
   #   token: ***
 
