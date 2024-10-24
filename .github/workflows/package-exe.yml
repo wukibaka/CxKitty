@@ -9,14 +9,14 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ macos-latest, ubuntu-latest, windows-latest ]
+        os: [ ubuntu-latest, windows-latest ]
 
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
             python-version: '3.10'
             architecture: 'x64'
@@ -36,9 +36,9 @@ jobs:
       - name: Create Executable File (Linux)
         if: runner.os == 'Linux'
         run: poetry run pyinstaller -F "main.py" --clean --dist ./out --name "CxKitty"  --add-data ".venv/lib/python3.10/site-packages/onnxruntime/capi/libonnxruntime_providers_shared.so:onnxruntime\capi"  --add-data ".venv/lib/python3.10/site-packages/ddddocr/common.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_det.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_old.onnx:ddddocr"
-      - name: Create Executable File (macOS)
-        if: runner.os == 'macOS'
-        run: poetry run pyinstaller -F "main.py" --clean --dist ./out --name "CxKitty" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_det.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_old.onnx:ddddocr"
+      # - name: Create Executable File (macOS)
+      #   if: runner.os == 'macOS'
+      #   run: poetry run pyinstaller -F "main.py" --clean --dist ./out --name "CxKitty" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_det.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_old.onnx:ddddocr"
 
 
       - name: Copy Required Files
