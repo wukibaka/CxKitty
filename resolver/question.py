@@ -26,6 +26,7 @@ from logger import Logger
 
 from .searcher import MultiSearcherWraper, SearcherResp
 from .searcher.ollama import OllamaSearcherAPI
+from .searcher.oaifree import OaifreeSearcherAPI
 from .searcher.json import JsonFileSearcher
 from .searcher.openai import OpenAISearcher
 from .searcher.restapi import (
@@ -54,6 +55,7 @@ SEARCHERS = {
     "LemonSearcher": LemonSearcher,
     "OpenAISearcher": OpenAISearcher,
     "OllamaSearcherAPI":OllamaSearcherAPI,
+    "OaifreeSearcherAPI":OaifreeSearcherAPI,
 }
 
 
