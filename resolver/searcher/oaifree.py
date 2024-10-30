@@ -13,7 +13,7 @@ class OaifreeSearcherAPI(SearcherBase):
     def __init__(self, **config) -> None:
         super().__init__()
         self.config = config
-        self.logger = Logger("OllamaSearcherAPI")
+        self.logger = Logger("OaifreeSearcherAPI")
 
     def invoke(self, question: QuestionModel) -> SearcherResp:
         # 将选项从 JSON 转换成人类易读的形式
@@ -47,12 +47,8 @@ class OaifreeSearcherAPI(SearcherBase):
             "model": self.config.get("model", "gpt-4o-mini"),
             "messages": [
                 {
-                    "role": "system",
-                    "content": system_prompt
-                },
-                {
                     "role": "user",
-                    "content": prompt
+                    "content": system_prompt + prompt
                 }
             ],
             "stream": False,
@@ -78,18 +74,67 @@ class OaifreeSearcherAPI(SearcherBase):
         except requests.exceptions.RequestException as err:
             return SearcherResp(-500, str(err), self, question.value, None)
 
-        # 单选题需要进一步预处理 AI 返回结果，以使 QuestionResolver 能正确命中
-        if question.type.value == 0:
-            response_text = response_text.strip()
+        # 根据不同题型处理 AI 返回的结果
+        response_text = response_text.strip()
+
+        if question.type.value == 0:  # 单选题
             for k, v in question.options.items():
                 if response_text.startswith(f"{k}.") or (v in response_text):
                     response_text = v
                     break
 
-        # 多选题处理
-        elif question.type.value == 1:
+        elif question.type.value == 1:  # 多选题
             selected_answers = [v for k, v in question.options.items() if v in response_text]
-            response_text = "#".join(selected_answers)  # 将所有选中的答案以 '#' 分隔
+            response_text = "#".join(selected_answers)
+
+        elif question.type.value == 2:  # 填空题
+            # 假设填空题只需要返回填空的内容
+            response_text = response_text
+
+        elif question.type.value == 3:  # 判断题
+            if "正确" in response_text or "是" in response_text:
+                response_text = "正确"
+            elif "错误" in response_text or "否" in response_text:
+                response_text = "错误"
+
+        elif question.type.value in [4, 5, 6, 7, 8, 9, 10]:  # 简答题, 名词解释, 论述题, 计算题, 其它, 分录题, 资料题
+            # 对于这些题型，直接返回生成的答案
+            response_text = response_text
+
+        elif question.type.value == 11:  # 连线题
+            # 假设连线题返回格式为 "A-1, B-2"
+            response_text = response_text
+
+        elif question.type.value == 13:  # 排序题
+            # 假设排序题返回格式为 "1, 2, 3"
+            response_text = response_text
+
+        elif question.type.value == 14:  # 完型填空
+            # 假设完型填空返回一个完整的段落
+            response_text = response_text
+
+        elif question.type.value == 15:  # 阅读理解
+            # 假设阅读理解返回问题的答案
+            response_text = response_text
+
+        elif question.type.value == 18:  # 口语题
+            # 假设口语题返回的是建议的回答内容
+            response_text = response_text
+
+        elif question.type.value == 19:  # 听力题
+            # 假设听力题返回的是听到的内容
+            response_text = response_text
+
+        elif question.type.value == 20:  # 共用选项题
+            # 假设共用选项题与单选题类似，返回选择的答案
+            for k, v in question.options.items():
+                if response_text.startswith(f"{k}.") or (v in response_text):
+                    response_text = v
+                    break
+
+        elif question.type.value == 21:  # 测评题
+            # 假设测评题返回测评的结果或建议
+            response_text = response_text
 
         self.logger.info(f"\u8fd4\u56de\u7ed3\u679c\uff1a{response_text}")
         return SearcherResp(0, "", self, question.value, response_text)
