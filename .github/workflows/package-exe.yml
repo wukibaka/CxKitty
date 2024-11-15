@@ -31,7 +31,7 @@ jobs:
         run: poetry add pyinstaller
 
       - name: Create Executable File (Windows)
-        run: poetry run pyinstaller -F "main.py" --clean --dist ./out --name "CxKitty" --add-data ".venv\Lib\site-packages\onnxruntime\capi\onnxruntime_providers_shared.dll;onnxruntime\capi" --add-data ".venv\Lib\site-packages\ddddocr\common.onnx;ddddocr" --add-data ".venv\Lib\site-packages\ddddocr\common_det.onnx;ddddocr" --add-data ".venv\Lib\site-packages\ddddocr\common_old.onnx;ddddocr" || true
+        run: poetry run pyinstaller -F "main.py" --clean --dist ./out --name "CxKitty" --add-data ".venv\Lib\site-packages\onnxruntime\capi\onnxruntime_providers_shared.dll;onnxruntime\capi" --add-data ".venv\Lib\site-packages\ddddocr\common.onnx;ddddocr" --add-data ".venv\Lib\site-packages\ddddocr\common_det.onnx;ddddocr" --add-data ".venv\Lib\site-packages\ddddocr\common_old.onnx;ddddocr"
 
       - name: Copy Required Files
         run: |
@@ -70,7 +70,7 @@ jobs:
         run: poetry add pyinstaller
 
       - name: Create Executable File (Linux)
-        run: poetry run pyinstaller -F "main.py" --clean --dist ./out --name "CxKitty" --add-data ".venv/lib/python3.10/site-packages/onnxruntime/capi/libonnxruntime_providers_shared.so:onnxruntime\capi" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_det.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_old.onnx:ddddocr" || true
+        run: poetry run pyinstaller -F "main.py" --clean --dist ./out --name "CxKitty" --add-data ".venv/lib/python3.10/site-packages/onnxruntime/capi/libonnxruntime_providers_shared.so:onnxruntime\capi" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_det.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_old.onnx:ddddocr"
 
       - name: Copy Required Files
         run: |
@@ -88,6 +88,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          brew install gettext
+          echo "export DYLD_LIBRARY_PATH=\"/usr/local/opt/gettext/lib:$DYLD_LIBRARY_PATH\"" >> ~/.zshrc
+          source ~/.zshrc
+          echo "Dependencies installed."
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -109,7 +116,7 @@ jobs:
         run: poetry add pyinstaller
 
       - name: Create Executable File (macOS)
-        run: poetry run pyinstaller -F "main.py" --clean --dist ./out --name "CxKitty" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_det.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_old.onnx:ddddocr" || true
+        run: poetry run pyinstaller -F "main.py" --clean --dist ./out --name "CxKitty" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_det.onnx:ddddocr" --add-data ".venv/lib/python3.10/site-packages/ddddocr/common_old.onnx:ddddocr"
 
       - name: Copy Required Files
         run: |
