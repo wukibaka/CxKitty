@@ -18,13 +18,13 @@ from .utils import inf_enc_sign, get_ts
 TaskPointType = PointWorkDto | PointVideoDto | PointDocumentDto
 
 # 接口-课程章节任务点状态
-API_CHAPTER_POINT = "https://mooc1-api.chaoxing.com/job/myjobsnodesmap"
+API_CHAPTER_POINT = "https://mooc.istudy.szpu.edu.cn/job/myjobsnodesmap"
 
 # 接口-课程章节卡片
-API_CHAPTER_CARDS = "https://mooc1-api.chaoxing.com/gas/knowledge"
+API_CHAPTER_CARDS = "https://mooc.istudy.szpu.edu.cn/gas/knowledge"
 
 # SSR页面-用于刷新锁定的任务点
-PAGE_REFRESH_CHAPTER = "https://mooc1.chaoxing.com/mooc-ans/mycourse/studentstudyAjax"
+PAGE_REFRESH_CHAPTER = "https://mooc.istudy.szpu.edu.cn/mooc-ans/mycourse/studentstudyAjax"
 
 
 class ChapterContainer:

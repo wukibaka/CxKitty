@@ -5,7 +5,7 @@ from ..exception import APIError
 from ..utils import get_ts
 
 # 接口-课程文档阅读上报
-API_DOCUMENT_READINGREPORT = "https://mooc1.chaoxing.com/ananas/job/document"
+API_DOCUMENT_READINGREPORT = "https://mooc.istudy.szpu.edu.cn/ananas/job/document"
 
 
 class PointDocumentDto(TaskPointBase):

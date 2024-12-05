@@ -13,10 +13,10 @@ from .schema import AccountInfo, ChapterModel, ClassExamModule, ClassModule, Cla
 from .session import SessionWraper
 
 # 接口-课程章节列表
-API_CHAPTER_LST = "https://mooc1-api.chaoxing.com/gas/clazz"
+API_CHAPTER_LST = "https://mooc.istudy.szpu.edu.cn/gas/clazz"
 
 # SSR页面-课程考试列表
-PAGE_EXAM_LIST = "https://mooc1-api.chaoxing.com/exam/phone/task-list"
+PAGE_EXAM_LIST = "https://mooc.istudy.szpu.edu.cn/exam/phone/task-list"
 
 
 class ClassContainer:

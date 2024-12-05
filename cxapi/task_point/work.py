@@ -12,10 +12,10 @@ from ..schema import QuestionModel, QuestionsExportSchema, QuestionsExportType, 
 from ..utils import remove_escape_chars
 
 # 接口-单元作业答题提交
-API_WORK_COMMIT = "https://mooc1-api.chaoxing.com/work/addStudentWorkNew"
+API_WORK_COMMIT = "https://mooc.istudy.szpu.edu.cn/work/addStudentWorkNew"
 
 # SSR页面-客户端单元测验答题页
-PAGE_MOBILE_WORK = "https://mooc1-api.chaoxing.com/android/mworkspecial"
+PAGE_MOBILE_WORK = "https://mooc.istudy.szpu.edu.cn/android/mworkspecial"
 
 
 def parse_question(question_node: Tag) -> QuestionModel:

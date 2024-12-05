@@ -12,7 +12,7 @@ from .schema import QuestionModel, QuestionsExportSchema
 from .session import SessionWraper
 
 # SSR页面-客户端章节任务卡片
-PAGE_MOBILE_CHAPTER_CARD = "https://mooc1-api.chaoxing.com/knowledge/cards"
+PAGE_MOBILE_CHAPTER_CARD = "https://mooc.istudy.szpu.edu.cn/knowledge/cards"
 
 
 class QAQDtoBase:

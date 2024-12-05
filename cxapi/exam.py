@@ -48,22 +48,22 @@ from .session import SessionWraper
 from .utils import get_exam_signature, get_imei, remove_escape_chars
 
 # SSR页面-考试入口封面
-PAGE_EXAM_COVER = "https://mooc1-api.chaoxing.com/exam-ans/exam/phone/task-exam"
+PAGE_EXAM_COVER = "https://mooc.istudy.szpu.edu.cn/exam-ans/exam/phone/task-exam"
 
 # SSR页面-考试单题
-PAGE_EXAM_QUESTION = "https://mooc1-api.chaoxing.com/exam-ans/exam/test/reVersionTestStartNew"
+PAGE_EXAM_QUESTION = "https://mooc.istudy.szpu.edu.cn/exam-ans/exam/test/reVersionTestStartNew"
 
 # SSR页面-考试整卷预览
-PAGE_EXAM_PREVIEW = "https://mooc1-api.chaoxing.com/exam-ans/exam/phone/preview"
+PAGE_EXAM_PREVIEW = "https://mooc.istudy.szpu.edu.cn/exam-ans/exam/phone/preview"
 
 # API-开始考试
-API_START_START = "https://mooc1-api.chaoxing.com/exam-ans/exam/phone/start"
+API_START_START = "https://mooc.istudy.szpu.edu.cn/exam-ans/exam/phone/start"
 
 # API-答案提交
-API_SUBMIT_ANSWER = "https://mooc1.chaoxing.com/exam-ans/exam/test/reVersionSubmitTestNew"
+API_SUBMIT_ANSWER = "https://mooc.istudy.szpu.edu.cn/exam-ans/exam/test/reVersionSubmitTestNew"
 
 # API-获取答题卡状态
-API_ANSWER_SHEET = "https://mooc1-api.chaoxing.com/exam-ans/exam/phone/loadAnswerStatic"
+API_ANSWER_SHEET = "https://mooc.istudy.szpu.edu.cn/exam-ans/exam/phone/loadAnswerStatic"
 
 
 def parse_question(question_node: Tag) -> QuestionModel:

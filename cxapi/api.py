@@ -26,7 +26,7 @@ API_QRCREATE = "https://passport2.chaoxing.com/createqr"
 API_QRLOGIN = "https://passport2.chaoxing.com/getauthstatus"
 
 # 接口-课程列表
-API_CLASS_LST = "https://mooc1-api.chaoxing.com/mycourse/backclazzdata"
+API_CLASS_LST = "https://mooc.istudy.szpu.edu.cn/mycourse/backclazzdata"
 
 # 接口-SSO二步登录 (用作获取登录信息)
 API_SSO_LOGIN = "https://sso.chaoxing.com/apis/login/userLogin4Uname.do"

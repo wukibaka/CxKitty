@@ -9,10 +9,10 @@ from ..exception import APIError
 from ..utils import get_ts
 
 # 接口-课程章节卡片资源
-API_CHAPTER_CARD_RESOURCE = "https://mooc1-api.chaoxing.com/ananas/status"
+API_CHAPTER_CARD_RESOURCE = "https://mooc.istudy.szpu.edu.cn/ananas/status"
 
 # 接口-视频播放上报
-API_VIDEO_PLAYREPORT = "https://mooc1-api.chaoxing.com/multimedia/log/a"
+API_VIDEO_PLAYREPORT = "https://mooc.istudy.szpu.edu.cn/multimedia/log/a"
 
 
 class PointVideoDto(TaskPointBase):
